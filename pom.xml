@@ -8,7 +8,7 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.springler.demo</groupId>
-    <artifactId>learning-spring</artifactId>
+    <artifactId>get-data</artifactId>
     <version>1.0.0</version>
     <name>learning-spring</name>
     <description>Demo application for Learning Spring with Spring Boot</description>
