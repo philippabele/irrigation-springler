@@ -23,7 +23,7 @@ public class SpringlerApplication {
         private GreenRepository greenRepository;
 
         @GetMapping
-        public Iterable<Green> getRooms() {
+        public Iterable<Green> getGreens() {
             return this.greenRepository.findAll();
         }
 
