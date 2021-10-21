@@ -17,6 +17,7 @@ public class SpringlerApplication {
         SpringApplication.run(SpringlerApplication.class, args);
     }
 
+    @RestController
     @RequestMapping("/history")
     public class RoomController {
         @Autowired
