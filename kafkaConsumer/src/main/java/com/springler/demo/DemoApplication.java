@@ -1,4 +1,4 @@
-package com.consumer;
+package com.springler.demo;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

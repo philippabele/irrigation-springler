@@ -1,4 +1,4 @@
-package com.consumer;
+package com.springler.demo;
 
 import java.util.HashMap;
 import java.util.Map;
