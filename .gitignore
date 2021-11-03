@@ -1,3 +1,6 @@
+# Credentials
+.env
+
 # Compiled class file
 *.class
 
