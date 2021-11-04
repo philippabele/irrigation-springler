@@ -4,22 +4,17 @@ import com.springler.demo.data.entity.Green;
 import com.springler.demo.data.entity.Quote;
 import com.springler.demo.data.repository.GreenRepository;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.annotation.TopicPartition;
+
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.KafkaHeaders;
+
 import org.springframework.kafka.support.SendResult;
-import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.messaging.handler.annotation.Payload;
+
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
@@ -42,7 +37,7 @@ public class SpringlerApplication {
         ConfigurableApplicationContext context = SpringApplication.run(SpringlerApplication.class, args);
 
         MessageProducer producer = context.getBean(MessageProducer.class);
-        MessageListener listener = context.getBean(MessageListener.class);
+
         /*
          * Sending a Hello World message to topic 'baeldung'. Must be received by both
          * listeners with group foo and bar with containerFactory
@@ -51,7 +46,6 @@ public class SpringlerApplication {
          * headersKafkaListenerContainerFactory as container factory.
          */
         producer.sendMessage("Hello, World!");
-        listener.latch.await(10, TimeUnit.SECONDS);
 
         /*
          * Sending message to a topic with 5 partitions, each message to a different
@@ -61,7 +55,6 @@ public class SpringlerApplication {
         for (int i = 0; i < 5; i++) {
             producer.sendMessageToPartition("Hello To Partitioned Topic!", i);
         }
-        listener.partitionLatch.await(10, TimeUnit.SECONDS);
 
         /*
          * Sending message to 'filtered' topic. As per listener configuration, all
@@ -69,14 +62,12 @@ public class SpringlerApplication {
          */
         producer.sendMessageToFiltered("Hello Baeldung!");
         producer.sendMessageToFiltered("Hello World!");
-        listener.filterLatch.await(10, TimeUnit.SECONDS);
 
         /*
          * Sending message to 'greeting' topic. This will send and received a java
          * object with the help of greetingKafkaListenerContainerFactory.
          */
         producer.sendGreetingMessage(new Greeting("Greetings", "World!"));
-        listener.greetingLatch.await(10, TimeUnit.SECONDS);
 
         /*
          * Close the app if all work is done
@@ -89,11 +80,6 @@ public class SpringlerApplication {
     @Bean
     public MessageProducer messageProducer() {
         return new MessageProducer();
-    }
-
-    @Bean
-    public MessageListener messageListener() {
-        return new MessageListener();
     }
 
     public static class MessageProducer {
@@ -146,57 +132,6 @@ public class SpringlerApplication {
         public void sendGreetingMessage(Greeting greeting) {
             greetingKafkaTemplate.send(greetingTopicName, greeting);
         }
-    }
-
-    public static class MessageListener {
-
-        private CountDownLatch latch = new CountDownLatch(3);
-
-        private CountDownLatch partitionLatch = new CountDownLatch(2);
-
-        private CountDownLatch filterLatch = new CountDownLatch(2);
-
-        private CountDownLatch greetingLatch = new CountDownLatch(1);
-
-        @KafkaListener(topics = "${message.topic.name}", groupId = "foo", containerFactory = "fooKafkaListenerContainerFactory")
-        public void listenGroupFoo(String message) {
-            System.out.println("Received Message in group 'foo': " + message);
-            latch.countDown();
-        }
-
-        @KafkaListener(topics = "${message.topic.name}", groupId = "bar", containerFactory = "barKafkaListenerContainerFactory")
-        public void listenGroupBar(String message) {
-            System.out.println("Received Message in group 'bar': " + message);
-            latch.countDown();
-        }
-
-        @KafkaListener(topics = "${message.topic.name}", containerFactory = "headersKafkaListenerContainerFactory")
-        public void listenWithHeaders(@Payload String message,
-                @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
-            System.out.println("Received Message: " + message + " from partition: " + partition);
-            latch.countDown();
-        }
-
-        @KafkaListener(topicPartitions = @TopicPartition(topic = "${partitioned.topic.name}", partitions = { "0",
-                "3" }), containerFactory = "partitionsKafkaListenerContainerFactory")
-        public void listenToPartition(@Payload String message,
-                @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
-            System.out.println("Received Message: " + message + " from partition: " + partition);
-            this.partitionLatch.countDown();
-        }
-
-        @KafkaListener(topics = "${filtered.topic.name}", containerFactory = "filterKafkaListenerContainerFactory")
-        public void listenWithFilter(String message) {
-            System.out.println("Received Message in filtered listener: " + message);
-            this.filterLatch.countDown();
-        }
-
-        @KafkaListener(topics = "${greeting.topic.name}", containerFactory = "greetingKafkaListenerContainerFactory")
-        public void greetingListener(Greeting greeting) {
-            System.out.println("Received greeting message: " + greeting);
-            this.greetingLatch.countDown();
-        }
-
     }
 
     /*
