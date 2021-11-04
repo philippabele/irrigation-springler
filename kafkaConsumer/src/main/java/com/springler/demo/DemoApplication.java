@@ -3,6 +3,9 @@ package com.springler.demo;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import com.springler.demo.entity.Green;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -13,7 +16,9 @@ import org.springframework.kafka.support.KafkaHeaders;
 
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
 
@@ -32,6 +37,19 @@ public class DemoApplication {
 		listener.filterLatch.await(10, TimeUnit.SECONDS);
 
 		listener.greetingLatch.await(10, TimeUnit.SECONDS);
+
+	}
+
+	@RestController
+	@RequestMapping("/history")
+	final class RoomController {
+		@Autowired
+		private GreenRepository greenRepository;
+
+		@GetMapping
+		public Iterable<Green> getGreens() {
+			return this.greenRepository.findAll();
+		}
 
 	}
 
