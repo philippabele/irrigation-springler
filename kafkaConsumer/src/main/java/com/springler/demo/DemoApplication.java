@@ -66,7 +66,6 @@ public class DemoApplication {
 
 		@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<Green> addData(@RequestBody Green newGreen) {
-			// Green testGreen = new Green(4, "test", 200);
 			this.greenRepository.save(newGreen);
 			return new ResponseEntity<>(newGreen, HttpStatus.CREATED);
 		}
