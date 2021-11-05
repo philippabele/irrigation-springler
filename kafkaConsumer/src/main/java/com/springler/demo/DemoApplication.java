@@ -10,6 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.listener.MessageListener;
 
 import org.springframework.kafka.support.KafkaHeaders;
@@ -17,6 +20,8 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -42,7 +47,7 @@ public class DemoApplication {
 
 	@RestController
 	@RequestMapping("/history")
-	final class RoomController {
+	final class GreenController {
 		@Autowired
 		private GreenRepository greenRepository;
 
@@ -51,6 +56,19 @@ public class DemoApplication {
 			return this.greenRepository.findAll();
 		}
 
+	}
+
+	@RestController
+	@RequestMapping("/newentry")
+	final class EntryController {
+		@Autowired
+		private GreenRepository greenRepository;
+
+		@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<Green> addData(@RequestBody Green newGreen) {
+			this.greenRepository.save(newGreen);
+			return new ResponseEntity<>(newGreen, HttpStatus.CREATED);
+		}
 	}
 
 	@Bean

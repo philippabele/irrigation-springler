@@ -2,8 +2,6 @@ package com.springler.demo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,9 +11,8 @@ public class Green {
 
     @Id
     @Column(name = "GREEN_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long greenId;
-    @Column(name = "NAME")
+    @Column(name = "PLACE")
     private String greenName;
     @Column(name = "WATER_DAY_MM")
     private Integer waterDay;
@@ -33,11 +30,24 @@ public class Green {
         return greenId;
     }
 
+    public void setGreenId(long greenId) {
+        this.greenId = greenId;
+    }
+
     public String getGreenName() {
         return greenName;
+    }
+
+    public void setGreenName(String greenName) {
+        this.greenName = greenName;
     }
 
     public Integer getWaterDay() {
         return waterDay;
     }
+
+    public void setWaterDay(Integer waterDay) {
+        this.waterDay = waterDay;
+    }
+
 }
