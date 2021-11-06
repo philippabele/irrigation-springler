@@ -2,15 +2,9 @@
 
 ## Introduction
 
-establish the context, background and/or importance of the topic
-indicate an issue, problem, or controversy in the field of study
-define the topic or key terms
-state the purpose of the essay or piece of writing
-provide an overview of the coverage and/or structure of the writing
+Irrigation may play a vital role in commercial fruit growing as well as in flower gardens. To date, however, there has been little easy availability of smart, scalable and last but not least open source software for this kind of industry. The purpose of this project is to develop a set of microservices in order to provide useful features for digital gardening with a special focus on water management.
+The project presented here leverages the Spring Framework to implement the needed services. In order to build a scalable solution, Apache Kafka is used to connect the services and providing stream-processing.
 
-what the project is about
-why it is important
-how the project is organize
 
 java project with spring to provide smart irrigation services
 
