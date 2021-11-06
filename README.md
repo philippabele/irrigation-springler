@@ -6,6 +6,8 @@ Irrigation may play a vital role in commercial fruit growing as well as in flowe
 
 The project presented here leverages the Spring Framework to implement the needed services. In order to build a scalable solution, Apache Kafka is used to connect the services and providing stream-processing.
 
+## Planned data-driven process
+
 The first step of the planned process is to determine precipitation data, whether simulated or retrieved from a provider. Once the data is present and sent to a message broker, the data has to be aggregated and transformed to meet the gardeners individual analysis preferences. Following this transformation the data is sent again to the message broker to reach a consumer, whose task is to persist the information at a relational database. Finally there will be a RESTful API to fetch the stored information at any given time.
 
 # Install Kafka binaries for debugging
