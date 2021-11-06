@@ -3,10 +3,10 @@
 ## Introduction
 
 Irrigation may play a vital role in commercial fruit growing as well as in flower gardens. To date, however, there has been little easy availability of smart, scalable and last but not least open source software for this kind of industry. The purpose of this project is to develop a set of microservices in order to provide useful features for digital gardening with a special focus on water management.
+
 The project presented here leverages the Spring Framework to implement the needed services. In order to build a scalable solution, Apache Kafka is used to connect the services and providing stream-processing.
 
-
-java project with spring to provide smart irrigation services
+The first step of the planned process is to determine precipitation data, whether simulated or retrieved from a provider. Once the data is present and sent to a message broker, the data has to be aggregated and transformed to meet the gardeners individual analysis preferences. Following this transformation the data is sent again to the message broker to reach a consumer, whose task is to persist the information at a relational database. Finally there will be a RESTful API to fetch the stored information at any given time.
 
 # Install Kafka binaries for debugging
 
