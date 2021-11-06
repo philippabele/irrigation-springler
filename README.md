@@ -10,6 +10,22 @@ The project presented here leverages the Spring Framework to implement the neede
 
 The first step of the planned process is to determine precipitation data, whether simulated or retrieved from a provider. Once the data is present and sent to a message broker, the data has to be aggregated and transformed to meet the gardeners individual analysis preferences. Following this transformation the data is sent again to the message broker to reach a consumer, whose task is to persist the information at a relational database. Finally there will be a RESTful API to fetch the stored information at any given time.
 
+## References
+
+To date, several sources enabled the development of this project and supported my learning journey:
+
+- Video Kafka REPLACE ME
+- Book Kafka REPLACE ME
+- Kafka Website REPLACE ME
+- GitHub Repo about KafkaTemplate REPLACE ME
+
+- Video Spring REPLACE ME
+- Book Spring REPLACE ME
+- Website Baeldung REPLACE ME
+- GitHub Repo about Spring REPLACE ME
+
+Overall, these sources of information facilitated my learning journey and I encourage you to take a look these.
+
 # Install Kafka binaries for debugging
 
 - get the latest release
