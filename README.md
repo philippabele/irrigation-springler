@@ -1,5 +1,17 @@
 # irrigation-springler
 
+## Introduction
+
+establish the context, background and/or importance of the topic
+indicate an issue, problem, or controversy in the field of study
+define the topic or key terms
+state the purpose of the essay or piece of writing
+provide an overview of the coverage and/or structure of the writing
+
+what the project is about
+why it is important
+how the project is organize
+
 java project with spring to provide smart irrigation services
 
 # Install Kafka binaries for debugging
