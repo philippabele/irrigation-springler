@@ -27,7 +27,7 @@ To date, several sources enabled the development of this project and supported m
 - Baeldung (Website) https://www.baeldung.com/spring-kafka
 - GitHub (Repo) https://github.com/eugenp/tutorials/tree/master/spring-kafka
 
-Overall, these sources of information facilitated my entry in this domain and I encourage you to take a look them.
+Overall, these sources of information facilitated my entry in this domain and I encourage you to take a look at them.
 
 # Install Kafka binaries for debugging
 
