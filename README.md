@@ -1,6 +1,33 @@
 # irrigation-springler
 
-java project with spring to provide smart irrigation services
+## Introduction
+
+Irrigation may play a vital role in commercial fruit growing as well as in flower gardens. To date, however, there has been little easy availability of smart, scalable and last but not least open source software for this kind of industry. The purpose of this project is to develop a set of microservices in order to provide useful features for digital gardening with a special focus on water management.
+
+The project presented here leverages the Spring Framework to implement the needed services. In order to build a scalable solution, Apache Kafka is used to connect the services and providing stream-processing.
+
+## Planned data-driven process
+
+The first step of the planned process is to determine precipitation data, whether simulated or retrieved from a provider. Once the data is present and sent to a message broker, the data has to be aggregated and transformed to meet the gardeners individual analysis preferences. Following this transformation the data is sent again to the message broker to reach a consumer, whose task is to persist the information at a relational database. Finally there will be a RESTful API to fetch the stored information at any given time from a device or app of your choice.
+
+## References
+
+To date, several sources enabled the development of this project and supported my learning journey:
+
+### Apache Kafka
+
+- Course Apache Kafka Fundamentals (Video) https://www.youtube.com/c/Confluent/playlists
+- Learn Apache Kafka for Beginners (Video) https://www.linkedin.com/learning/learn-apache-kafka-for-beginners/
+- Kafka: The Definitive Guide (Book) https://www.confluent.de/resources/kafka-the-definitive-guide/
+
+### Spring Boot
+
+- Learning Spring with Spring Boot (Video) https://www.linkedin.com/learning/learning-spring-with-spring-boot-2
+- Spring Framework and Apache Kafka (Video) https://www.youtube.com/c/Confluent/playlists
+- Baeldung (Website) https://www.baeldung.com/spring-kafka
+- GitHub (Repo) https://github.com/eugenp/tutorials/tree/master/spring-kafka
+
+Overall, these sources of information facilitated my entry in this domain and I encourage you to take a look at them.
 
 # Install Kafka binaries for debugging
 
