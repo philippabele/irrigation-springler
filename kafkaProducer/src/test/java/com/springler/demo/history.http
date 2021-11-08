@@ -1,0 +1,7 @@
+
+# Get historical data of Weinheim
+# lat=49.5450 latitude
+# lon=8.6603 longitude
+# dt=1636287136 UNIXTIME
+# appid= >> APIKEY
+GET http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=49.5450&lon=8.6603&dt=1636287136&appid=??? HTTP/1.1
