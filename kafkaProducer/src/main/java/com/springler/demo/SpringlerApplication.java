@@ -1,10 +1,7 @@
 package com.springler.demo;
 
-import com.springler.demo.data.entity.Green;
 import com.springler.demo.data.entity.History;
 import com.springler.demo.data.entity.Hourly;
-import com.springler.demo.data.entity.Quote;
-import com.springler.demo.data.repository.GreenRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -148,22 +145,6 @@ public class SpringlerApplication {
     }
 
     @RestController
-    @RequestMapping("/quote")
-    final class QuoteController {
-
-        @Autowired
-        private RestTemplate restTemplate;
-        private Quote quote;
-
-        @GetMapping
-        public String getQuote() {
-            quote = restTemplate.getForObject("https://quoters.apps.pcfone.io/api/random", Quote.class);
-            return this.quote.toString();
-        }
-
-    }
-
-    @RestController
     @RequestMapping("/weatherapi")
     final class HistoryController {
 
@@ -195,16 +176,4 @@ public class SpringlerApplication {
      * Playing around with data from SQL DB
      */
 
-    @RestController
-    @RequestMapping("/greenhistory")
-    final class RoomController {
-        @Autowired
-        private GreenRepository greenRepository;
-
-        @GetMapping
-        public Iterable<Green> getGreens() {
-            return this.greenRepository.findAll();
-        }
-
-    }
 }
