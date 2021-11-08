@@ -12,22 +12,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "lat", "lon", "timezone", "timezone_offset", "current", "hourly" })
 @Generated("jsonschema2pojo")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @NonNull
-@ToString
 public class History {
 
     @JsonProperty("lat")
