@@ -1,6 +1,8 @@
 package com.springler.demo;
 
 import com.springler.demo.data.entity.Green;
+import com.springler.demo.data.entity.History;
+import com.springler.demo.data.entity.Hourly;
 import com.springler.demo.data.entity.Quote;
 import com.springler.demo.data.repository.GreenRepository;
 
@@ -161,12 +163,40 @@ public class SpringlerApplication {
 
     }
 
+    @RestController
+    @RequestMapping("/weatherapi")
+    final class HistoryController {
+
+        /**
+         *
+         */
+        private static final String url = "http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=49.5450&lon=8.6603&dt=1636287136&appid=???";
+
+        @Autowired
+        private RestTemplate restTemplate;
+        private History history;
+
+        @GetMapping
+        public String getHistory() {
+            history = restTemplate.getForObject(url, History.class);
+
+            String output = "";
+
+            for (Hourly hour : this.history.getHourly()) {
+                output = output + hour.getPressure().toString() + " / ";
+            }
+
+            return output;
+        }
+
+    }
+
     /*
      * Playing around with data from SQL DB
      */
 
     @RestController
-    @RequestMapping("/history")
+    @RequestMapping("/greenhistory")
     final class RoomController {
         @Autowired
         private GreenRepository greenRepository;
