@@ -16,16 +16,16 @@ To date, several sources enabled the development of this project and supported m
 
 ### Apache Kafka
 
-- Course Apache Kafka Fundamentals (Video) https://www.youtube.com/c/Confluent/playlists
-- Learn Apache Kafka for Beginners (Video) https://www.linkedin.com/learning/learn-apache-kafka-for-beginners/
-- Kafka: The Definitive Guide (Book) https://www.confluent.de/resources/kafka-the-definitive-guide/
+- Course Apache Kafka Fundamentals [Video](https://www.youtube.com/c/Confluent/playlists)
+- Learn Apache Kafka for Beginners [Video](https://www.linkedin.com/learning/learn-apache-kafka-for-beginners/)
+- Kafka: The Definitive Guide [Book](https://www.confluent.de/resources/kafka-the-definitive-guide/)
 
 ### Spring Boot
 
-- Learning Spring with Spring Boot (Video) https://www.linkedin.com/learning/learning-spring-with-spring-boot-2
-- Spring Framework and Apache Kafka (Video) https://www.youtube.com/c/Confluent/playlists
-- Baeldung (Website) https://www.baeldung.com/spring-kafka
-- GitHub (Repo) https://github.com/eugenp/tutorials/tree/master/spring-kafka
+- Learning Spring with Spring Boot [Video](https://www.linkedin.com/learning/learning-spring-with-spring-boot-2)
+- Spring Framework and Apache Kafka [Video](https://www.youtube.com/c/Confluent/playlists)
+- Baeldung [Website](https://www.baeldung.com/spring-kafka)
+- GitHub [Repo](https://github.com/eugenp/tutorials/tree/master/spring-kafka)
 
 Overall, these sources of information facilitated my entry in this domain and I encourage you to take a look at them.
 
