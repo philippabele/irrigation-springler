@@ -1,7 +1,11 @@
 package com.springler.demo;
 
+import java.time.Instant;
+
+import com.springler.demo.data.entity.City;
 import com.springler.demo.data.entity.History;
 import com.springler.demo.data.entity.Hourly;
+import com.springler.demo.data.entity.WeatherApi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,6 +96,9 @@ public class SpringlerApplication {
         @Autowired
         private KafkaTemplate<String, History> historyKafkaTemplate;
 
+        @Autowired
+        private RestTemplate restTemplate;
+
         @Value(value = "${history.topic.name}")
         private String historyTopicName;
 
@@ -136,6 +143,20 @@ public class SpringlerApplication {
 
         public void sendGreetingMessage(Greeting greeting) {
             greetingKafkaTemplate.send(greetingTopicName, greeting);
+        }
+
+        public void sendHistoryWeinheimYesterday() {
+
+            City weinheim = new City("Weinheim", 49.5450, 8.6603);
+
+            long unixYesterday = Instant.now().getEpochSecond() - 60 * 60 * 24;
+
+            String url = WeatherApi.getUrl(weinheim, unixYesterday, "261aefb083ddc24c99eecdc9552f6ce7");
+
+            History history = restTemplate.getForObject(url, History.class);
+
+            historyKafkaTemplate.send(historyTopicName, "WeinheimYesterday", history);
+
         }
     }
 
