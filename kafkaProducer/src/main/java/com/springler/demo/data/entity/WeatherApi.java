@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 
 public class WeatherApi {
 
-    public static History getHistory(City city, long time, String apikey) {
+    public static String getUrl(City city, long time, String apikey) {
 
         StringJoiner urlJoiner = new StringJoiner("");
 
@@ -14,9 +14,7 @@ public class WeatherApi {
         urlJoiner.add("&dt=" + Long.toString(time));
         urlJoiner.add("&appid=" + apikey);
 
-        History history = new History();
-
-        return history;
+        return urlJoiner.toString();
     }
 
 }
