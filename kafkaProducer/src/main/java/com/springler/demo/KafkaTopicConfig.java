@@ -20,6 +20,9 @@ public class KafkaTopicConfig {
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
+    @Value(value = "${history.topic.name}")
+    private String historyTopicName;
+
     @Value(value = "${message.topic.name}")
     private String topicName;
 
@@ -40,6 +43,11 @@ public class KafkaTopicConfig {
         Map<String, Object> configs = new HashMap<>();
         configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         return new KafkaAdmin(configs);
+    }
+
+    @Bean
+    public NewTopic historyTopic() {
+        return new NewTopic(historyTopicName, 1, (short) 1);
     }
 
     @Bean

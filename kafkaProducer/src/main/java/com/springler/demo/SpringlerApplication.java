@@ -92,6 +92,9 @@ public class SpringlerApplication {
         @Autowired
         private KafkaTemplate<String, History> historyKafkaTemplate;
 
+        @Value(value = "${history.topic.name}")
+        private String historyTopicName;
+
         @Value(value = "${message.topic.name}")
         private String topicName;
 
