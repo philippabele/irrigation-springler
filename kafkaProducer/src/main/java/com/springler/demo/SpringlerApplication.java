@@ -1,6 +1,7 @@
 package com.springler.demo;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 import com.springler.demo.data.entity.City;
 import com.springler.demo.data.entity.History;
@@ -40,6 +41,8 @@ public class SpringlerApplication {
         ConfigurableApplicationContext context = SpringApplication.run(SpringlerApplication.class, args);
 
         MessageProducer producer = context.getBean(MessageProducer.class);
+
+        producer.sendHistoryWeinheim();
 
         /*
          * Sending a Hello World message to topic 'baeldung'. Must be received by both
@@ -145,17 +148,15 @@ public class SpringlerApplication {
             greetingKafkaTemplate.send(greetingTopicName, greeting);
         }
 
-        public void sendHistoryWeinheimYesterday() {
+        public void sendHistoryWeinheim() {
 
-            City weinheim = new City("Weinheim", 49.5450, 8.6603);
-
-            long unixYesterday = Instant.now().getEpochSecond() - 60 * 60 * 24;
-
-            String url = WeatherApi.getUrl(weinheim, unixYesterday, "261aefb083ddc24c99eecdc9552f6ce7");
-
-            History history = restTemplate.getForObject(url, History.class);
-
-            historyKafkaTemplate.send(historyTopicName, "WeinheimYesterday", history);
+            for (int i = 1; i < 6; i++) {
+                City weinheim = new City("Weinheim", 49.5450, 8.6603);
+                long unixYesterday = Instant.now().minus(i, ChronoUnit.DAYS).getEpochSecond();
+                String url = WeatherApi.getUrl(weinheim, unixYesterday, "261aefb083ddc24c99eecdc9552f6ce7");
+                History history = restTemplate.getForObject(url, History.class);
+                historyKafkaTemplate.send(historyTopicName, "WeinheimYesterday", history);
+            }
 
         }
     }
