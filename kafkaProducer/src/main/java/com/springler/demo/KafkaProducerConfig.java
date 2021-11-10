@@ -17,6 +17,8 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.springler.demo.data.entity.History;
+
 @Configuration
 public class KafkaProducerConfig {
 
@@ -54,7 +56,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, Greeting> historyProducerFactory() {
+    public ProducerFactory<String, History> historyProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -63,8 +65,8 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, Greeting> historyKafkaTemplate() {
-        return new KafkaTemplate<>(greetingProducerFactory());
+    public KafkaTemplate<String, History> historyKafkaTemplate() {
+        return new KafkaTemplate<>(historyProducerFactory());
     }
 
 }
