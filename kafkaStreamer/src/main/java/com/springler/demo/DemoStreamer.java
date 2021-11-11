@@ -25,4 +25,10 @@ public class DemoStreamer {
     return kstream -> kstream.flatMapValues(history -> history.getHourly())
         .filter((key, hour) -> hour.getRain() != null).map((key, hourly) -> new KeyValue<>(key, formatHourly(hourly)));
   }
+
+  @Bean
+  public Function<KStream<String, PrecipitationDataPoint>, KStream<String, PrecipitationDataPoint>> streamApp2() {
+    return kstream -> kstream;
+  }
+
 }
