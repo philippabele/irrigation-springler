@@ -2,6 +2,7 @@ package com.springler.demo;
 
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.KTable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,6 +18,11 @@ public class DemoStreamer {
     return new KeyValue<>(hourly.getDt(), hourly.getRain().get_1h());
   }
 
+  public KeyValue<Integer, Double> printMe(Integer i, Double d) {
+    System.out.println("Key is " + i + " Value is " + d);
+    return new KeyValue<>(i, d);
+  }
+
   @Bean
   public Function<KStream<String, History>, KStream<Integer, Double>> streamApp() {
 
@@ -26,7 +32,7 @@ public class DemoStreamer {
 
   @Bean
   public Function<KStream<Integer, Double>, KStream<Integer, Double>> streamApp2() {
-    return kstream -> kstream;
+    return kstream -> kstream.map((K, V) -> printMe(K, V));
   }
 
 }
