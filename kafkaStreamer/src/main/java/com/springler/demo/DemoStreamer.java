@@ -9,25 +9,23 @@ import java.util.function.Function;
 
 import com.springler.demo.data.entity.History;
 import com.springler.demo.data.entity.Hourly;
-import com.springler.demo.data.entity.PrecipitationDataPoint;
 
 @Configuration
 public class DemoStreamer {
 
-  private static PrecipitationDataPoint formatHourly(Hourly hourly) {
-    PrecipitationDataPoint dataPoint = new PrecipitationDataPoint(hourly);
-    return dataPoint;
+  public KeyValue<Integer, Double> reduceSingleDataPoint(String key, Hourly hourly) {
+    return new KeyValue<>(hourly.getDt(), hourly.getRain().get_1h());
   }
 
   @Bean
-  public Function<KStream<String, History>, KStream<String, PrecipitationDataPoint>> streamApp() {
+  public Function<KStream<String, History>, KStream<Integer, Double>> streamApp() {
 
     return kstream -> kstream.flatMapValues(history -> history.getHourly())
-        .filter((key, hour) -> hour.getRain() != null).map((key, hourly) -> new KeyValue<>(key, formatHourly(hourly)));
+        .filter((key, hour) -> hour.getRain() != null).map((key, hourly) -> reduceSingleDataPoint(key, hourly));
   }
 
   @Bean
-  public Function<KStream<String, PrecipitationDataPoint>, KStream<String, PrecipitationDataPoint>> streamApp2() {
+  public Function<KStream<Integer, Double>, KStream<Integer, Double>> streamApp2() {
     return kstream -> kstream;
   }
 
