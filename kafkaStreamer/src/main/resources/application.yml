@@ -20,18 +20,24 @@ spring.cloud.stream:
       streamApp-out-0:
         producer:
           configuration:
+            key:
+              serializer: org.apache.kafka.common.serialization.IntegerDeserializer
             value:
-              serializer: org.springframework.kafka.support.serializer.JsonSerializer
+              serializer: org.apache.kafka.common.serialization.DoubleDeserializer
       streamApp2-in-0:
         consumer:
           configuration:
+            key:
+              serializer: org.apache.kafka.common.serialization.IntegerDeserializer
             value:
-              deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+              serializer: org.apache.kafka.common.serialization.DoubleDeserializer
       streamApp2-out-0:
         producer:
           configuration:
+            key:
+              serializer: org.apache.kafka.common.serialization.IntegerDeserializer
             value:
-              serializer: org.springframework.kafka.support.serializer.JsonSerializer
+              serializer: org.apache.kafka.common.serialization.DoubleDeserializer
     binder:
       brokers:
         - localhost:9091
