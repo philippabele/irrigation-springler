@@ -51,35 +51,35 @@ public class SpringlerApplication {
          * respectively. It will also be received by the listener with
          * headersKafkaListenerContainerFactory as container factory.
          */
-        producer.sendMessage("Hello, World!");
+        // producer.sendMessage("Hello, World!");
 
         /*
          * Sending message to a topic with 5 partitions, each message to a different
          * partition. But as per listener configuration, only the messages from
          * partition 0 and 3 will be consumed.
          */
-        for (int i = 0; i < 5; i++) {
-            producer.sendMessageToPartition("Hello To Partitioned Topic!", i);
-        }
+        // for (int i = 0; i < 5; i++) {
+        // producer.sendMessageToPartition("Hello To Partitioned Topic!", i);
+        // }
 
         /*
          * Sending message to 'filtered' topic. As per listener configuration, all
          * messages with char sequence 'World' will be discarded.
          */
-        producer.sendMessageToFiltered("Hello Baeldung!");
-        producer.sendMessageToFiltered("Hello World!");
+        // producer.sendMessageToFiltered("Hello Baeldung!");
+        // producer.sendMessageToFiltered("Hello World!");
 
         /*
          * Sending message to 'greeting' topic. This will send and received a java
          * object with the help of greetingKafkaListenerContainerFactory.
          */
-        producer.sendGreetingMessage(new Greeting("Greetings", "World!"));
+        // producer.sendGreetingMessage(new Greeting("Greetings", "World!"));
 
         /*
          * Close the app if all work is done
          */
 
-        // context.close();
+        context.close();
 
     }
 
