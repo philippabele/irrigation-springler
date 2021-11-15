@@ -1,7 +1,3 @@
-/*
- * https://github.com/eugenp/tutorials/tree/master/spring-kafka/src/main/java/com/baeldung/spring/kafka
-*/
-
 package com.springler.demo;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -22,38 +18,10 @@ import com.springler.demo.data.entity.History;
 @Configuration
 public class KafkaProducerConfig {
 
+    // https://github.com/eugenp/tutorials/tree/master/spring-kafka/src/main/java/com/baeldung/spring/kafka
+
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
-
-    @Bean
-    public ProducerFactory<String, String> producerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, "20971520");
-
-        return new DefaultKafkaProducerFactory<>(configProps);
-    }
-
-    @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
-    }
-
-    @Bean
-    public ProducerFactory<String, Greeting> greetingProducerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return new DefaultKafkaProducerFactory<>(configProps);
-    }
-
-    @Bean
-    public KafkaTemplate<String, Greeting> greetingKafkaTemplate() {
-        return new KafkaTemplate<>(greetingProducerFactory());
-    }
 
     @Bean
     public ProducerFactory<String, History> historyProducerFactory() {

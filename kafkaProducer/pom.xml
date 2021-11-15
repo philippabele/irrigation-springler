@@ -8,9 +8,9 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.springler.demo</groupId>
-    <artifactId>get-data</artifactId>
+    <artifactId>kafkaProducer</artifactId>
     <version>1.0.0</version>
-    <name>learning-spring</name>
+    <name>kafkaProducer</name>
     <description>Demo application for Learning Spring with Spring Boot</description>
 
     <properties>
@@ -38,6 +38,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
         </dependency>
 
         <dependency>
@@ -45,9 +46,17 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+        <!-- Test Scope-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

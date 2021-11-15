@@ -1,7 +1,3 @@
-/*
- * https://github.com/eugenp/tutorials/tree/master/spring-kafka/src/main/java/com/baeldung/spring/kafka
-*/
-
 package com.springler.demo;
 
 import java.util.HashMap;
@@ -17,26 +13,13 @@ import org.springframework.kafka.core.KafkaAdmin;
 @Configuration
 public class KafkaTopicConfig {
 
+    // https://github.com/eugenp/tutorials/tree/master/spring-kafka/src/main/java/com/baeldung/spring/kafka
+
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
     @Value(value = "${history.topic.name}")
     private String historyTopicName;
-
-    @Value(value = "${message.topic.name}")
-    private String topicName;
-
-    @Value(value = "${long.message.topic.name}")
-    private String longMsgTopicName;
-
-    @Value(value = "${partitioned.topic.name}")
-    private String partitionedTopicName;
-
-    @Value(value = "${filtered.topic.name}")
-    private String filteredTopicName;
-
-    @Value(value = "${greeting.topic.name}")
-    private String greetingTopicName;
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
@@ -50,32 +33,4 @@ public class KafkaTopicConfig {
         return new NewTopic(historyTopicName, 1, (short) 1);
     }
 
-    @Bean
-    public NewTopic topic1() {
-        return new NewTopic(topicName, 1, (short) 1);
-    }
-
-    @Bean
-    public NewTopic topic2() {
-        return new NewTopic(partitionedTopicName, 6, (short) 1);
-    }
-
-    @Bean
-    public NewTopic topic3() {
-        return new NewTopic(filteredTopicName, 1, (short) 1);
-    }
-
-    @Bean
-    public NewTopic topic4() {
-        return new NewTopic(greetingTopicName, 1, (short) 1);
-    }
-
-    @Bean
-    public NewTopic topic5() {
-        NewTopic newTopic = new NewTopic(longMsgTopicName, 1, (short) 1);
-        Map<String, String> configs = new HashMap<>();
-        configs.put("max.message.bytes", "20971520");
-        newTopic.configs(configs);
-        return newTopic;
-    }
 }
