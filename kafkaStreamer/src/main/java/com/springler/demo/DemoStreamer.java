@@ -31,8 +31,8 @@ public class DemoStreamer {
   }
 
   @Bean
-  public Function<KStream<Integer, Double>, KStream<Integer, Double>> streamApp2() {
-    return kstream -> kstream.map((K, V) -> printMe(K, V));
+  public Function<KTable<Integer, Double>, KStream<Integer, Double>> streamApp2() {
+    return KTable -> KTable.toStream().map((k, v) -> printMe(k, v));
   }
 
 }
