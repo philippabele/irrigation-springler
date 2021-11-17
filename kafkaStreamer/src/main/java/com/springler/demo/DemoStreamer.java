@@ -1,6 +1,8 @@
 package com.springler.demo;
 
+import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KeyValue;
+import org.apache.kafka.streams.kstream.Grouped;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
 import org.springframework.context.annotation.Bean;
@@ -30,9 +32,14 @@ public class DemoStreamer {
         .filter((key, hour) -> hour.getRain() != null).map((key, hourly) -> reduceSingleDataPoint(key, hourly));
   }
 
+  // Stream the upper one to a state store !
+
+  // Consume the state store in the lower one :)
+
   @Bean
-  public Function<KTable<Integer, Double>, KStream<Integer, Double>> streamApp2() {
-    return KTable -> KTable.toStream().map((k, v) -> printMe(k, v));
+  public Function<KStream<Integer, Double>, KStream<Integer, Double>> streamApp2() {
+    return kstream -> kstream.map((k, v) -> printMe(k, v)).groupByKey(Grouped.with(Serdes.Integer(), Serdes.Double()))
+        .reduce(Double::sum).toStream().map((k, v) -> printMe(k, v));
   }
 
 }
