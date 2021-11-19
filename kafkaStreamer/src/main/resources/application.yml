@@ -1,3 +1,17 @@
+# Micrometer monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - bindings
+          - prometheus
+          - info
+          - health
+
+server:
+  port: 28080
+
 spring.cloud.stream:
   function:
     definition: streamApp;streamApp2
