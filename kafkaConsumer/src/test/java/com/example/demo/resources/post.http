@@ -1,8 +1,0 @@
-POST http://localhost:18080/newentry HTTP/1.1
-content-type: application/json
-
-{
-    "greenId": "30",
-    "greenName": "home",
-    "waterDay": "300"
-}
