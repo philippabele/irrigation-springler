@@ -1,6 +1,6 @@
-package com.springler.demo;
+package com.irrigation.kafkaconsumer;
 
-import com.springler.demo.entity.Green;
+import com.irrigation.kafkaconsumer.entity.Green;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.springler.demo;
+package com.irrigation.kafkaconsumer;
 
 import java.util.HashMap;
 import java.util.Map;

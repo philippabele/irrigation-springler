@@ -1,4 +1,4 @@
-package com.springler.demo.entity;
+package com.irrigation.kafkaconsumer.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,9 +1,9 @@
-package com.springler.demo;
+package com.irrigation.kafkaconsumer;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import com.springler.demo.entity.Green;
+import com.irrigation.kafkaconsumer.entity.Green;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -28,10 +28,10 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
 
 @SpringBootApplication
-public class DemoApplication {
+public class KafkaconsumerApplication {
 
 	public static void main(String[] args) throws InterruptedException {
-		ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(KafkaconsumerApplication.class, args);
 
 		MessageListener listener = context.getBean(MessageListener.class);
 
