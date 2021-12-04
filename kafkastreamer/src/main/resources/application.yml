@@ -1,0 +1,10 @@
+# Micrometer monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - bindings
+          - prometheus
+          - info
+          - health
