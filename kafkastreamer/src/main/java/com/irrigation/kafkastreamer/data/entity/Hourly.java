@@ -1,5 +1,5 @@
 
-package com.springler.demo.data.entity;
+package com.irrigation.kafkastreamer.data.entity;
 
 import java.util.HashMap;
 import java.util.List;

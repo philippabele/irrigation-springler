@@ -10,7 +10,7 @@ management:
           - health
 
 server:
-  port: 28080
+  port: 8080
 
 spring.cloud.stream:
   function:
@@ -54,4 +54,4 @@ spring.cloud.stream:
               serializer: org.apache.kafka.common.serialization.DoubleDeserializer
     binder:
       brokers:
-        - localhost:9091
+        - 192.168.2.102:9092

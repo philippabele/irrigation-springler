@@ -1,13 +1,13 @@
-package com.springler.demo;
+package com.irrigation.kafkastreamer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class KafkastreamerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(KafkastreamerApplication.class, args);
 	}
 
 }
