@@ -8,3 +8,50 @@ management:
           - prometheus
           - info
           - health
+
+server:
+  port: 8080
+
+spring.cloud.stream:
+  function:
+    definition: streamApp;streamApp2
+  bindings:
+    streamApp-in-0:
+      destination: history
+    streamApp-out-0:
+      destination: hourly
+    streamApp2-in-0:
+      destination: hourly
+    streamApp2-out-0:
+      destination: daily
+  kafka:
+    bindings:
+      streamApp-in-0:
+        consumer:
+          configuration:
+            value:
+              deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      streamApp-out-0:
+        producer:
+          configuration:
+            key:
+              serializer: org.apache.kafka.common.serialization.IntegerDeserializer
+            value:
+              serializer: org.apache.kafka.common.serialization.DoubleDeserializer
+      streamApp2-in-0:
+        consumer:
+          configuration:
+            key:
+              serializer: org.apache.kafka.common.serialization.IntegerDeserializer
+            value:
+              serializer: org.apache.kafka.common.serialization.DoubleDeserializer
+      streamApp2-out-0:
+        producer:
+          configuration:
+            key:
+              serializer: org.apache.kafka.common.serialization.IntegerDeserializer
+            value:
+              serializer: org.apache.kafka.common.serialization.DoubleDeserializer
+    binder:
+      brokers:
+        - 192.168.2.102:9092
