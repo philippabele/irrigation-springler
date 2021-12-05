@@ -1,4 +1,4 @@
-FROM maven:3.8.3-openjdk-8 as build
+FROM maven:3.8.3-openjdk-17 as build
 WORKDIR /workspace/app
 
 COPY mvnw .
@@ -9,7 +9,7 @@ COPY src src
 RUN mvn clean package
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-FROM openjdk:8-jdk-alpine
+FROM openjdk:17-jdk-alpine
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 VOLUME /tmp
