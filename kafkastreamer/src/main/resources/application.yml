@@ -54,4 +54,4 @@ spring.cloud.stream:
               serializer: org.apache.kafka.common.serialization.DoubleDeserializer
     binder:
       brokers:
-        - 192.168.2.102:9092
+        - ${KAFKA_BOOTSTRAP_SERVER}
